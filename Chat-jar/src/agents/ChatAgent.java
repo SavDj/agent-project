@@ -85,7 +85,7 @@ public class ChatAgent implements Agent {
 							ws.sendText(receiver, "LOG_IN:FAILURE" + username);
 						}
 						break;
-					case "GET_LOGGEDIN":
+					case "GET_LOGGED_IN":
 						username = (String) tmsg.getObjectProperty("username");
 						List<User> loggedInUsers = chatManager.loggedInUsers();
 						

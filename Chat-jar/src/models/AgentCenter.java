@@ -2,16 +2,16 @@ package models;
 
 import java.io.Serializable;
 
-public class Host implements Serializable{
+public class AgentCenter implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	private String alias;
 	private String address;
 	
-	public Host() {}
+	public AgentCenter() {}
 
-	public Host(String alias, String address) {
+	public AgentCenter(String alias, String address) {
 		super();
 		this.alias = alias;
 		this.address = address;
