@@ -60,6 +60,16 @@ public class ChatManagerBean implements ChatManagerRemote, ChatManagerLocal {
 	}
 	
 	@Override
+	public boolean isUserLoggedIn(String username) {
+		for (User user : loggedIn) {
+			if(user.getUsername() == username) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
 	public User getRegisteredUser(String username) {
 		for(User user : registered) {
 			if(user.getUsername().equals(username)) {

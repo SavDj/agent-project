@@ -12,10 +12,13 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
+import agentmanager.AID;
 import agentmanager.AgentManagerBean;
 import agentmanager.AgentManagerRemote;
+import agents.AgentType;
 import chatmanager.ChatManagerBean;
 import chatmanager.ChatManagerRemote;
+import models.AgentCenter;
 import models.AppMessage;
 import util.JNDILookup;
 
@@ -29,20 +32,22 @@ public class WSChat {
 	@OnOpen
 	public void onOpen(@PathParam("username") String username, Session session) {
 		sessions.put(username, session);
-		agentManager.startAgent(JNDILookup.ChatAgentLookup, session.getId());
+		agentManager.startAgent(JNDILookup.ChatAgentLookup);
 	}
 	
 	@OnClose
 	public void onClose(@PathParam("username") String username, Session session) {
 		sessions.remove(username);
 		chatManager.logout(username);
-		agentManager.stopAgent(username);
+		AID agentId = new AID(username, new AgentCenter(), new AgentType("CHAT_AGENT"));
+		agentManager.stopAgent(agentId);
 	}
 	
 	@OnError
 	public void onError(@PathParam("username") String username, Session session, Throwable t) {
 		sessions.remove(username);
-		agentManager.stopAgent(username);
+		AID agentId = new AID(username, new AgentCenter(), new AgentType("CHAT_AGENT"));
+		agentManager.stopAgent(agentId);
 		chatManager.logout(username);
 		t.printStackTrace();
 	}
@@ -68,14 +73,5 @@ public class WSChat {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	public String getLoggedInUsername(String sessionId) {
-		for (Session value : sessions.values()) {
-			if(value.getId().equals(sessionId)) {
-				return value.getId();
-			}
-	    }
-		return null;
 	}
 }

@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-        
-    <wb-module deploy-name="Chat-ear">
                 
+    
+    
+    <wb-module deploy-name="Agent-ear">
+                                
+        
+        
         <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
                 
-        <dependent-module archiveName="Chat-jar.jar" deploy-path="/" handle="module:/resource/Chat-jar/Chat-jar">
+        <dependent-module archiveName="Agent-jar.jar" deploy-path="/" handle="module:/resource/Agent-jar/Agent-jar">
                         
             <dependent-object/>
                         
@@ -12,14 +16,16 @@
                     
         </dependent-module>
                 
-        <dependent-module archiveName="Chat-war.war" deploy-path="/" handle="module:/resource/Chat-war/Chat-war">
-                        
-            <dependent-object/>
+        <dependent-module archiveName="Agent-war.jar" deploy-path="/" handle="module:/resource/Agent-war/Agent-war">
                         
             <dependency-type>uses</dependency-type>
                     
         </dependent-module>
-            
-    </wb-module>
+                            
     
+    
+    </wb-module>
+            
+
+
 </project-modules>

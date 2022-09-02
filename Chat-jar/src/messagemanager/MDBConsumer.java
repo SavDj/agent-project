@@ -6,9 +6,11 @@ import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
 
 import agents.Agent;
 import agents.CachedAgentsRemote;
+import agentmanager.AID;
 
 /**
  * Message-Driven Bean implementation class for: MDBConsumer
@@ -32,11 +34,13 @@ public class MDBConsumer implements MessageListener {
 	 * @see MessageListener#onMessage(Message)
 	 */
 	public void onMessage(Message message) {
-		String receiver;
 		try {
-			receiver = (String) message.getObjectProperty("receiver");
-			Agent agent = (Agent) cachedAgents.getRunningAgents().get(receiver);
-			agent.handleMessage(message);
+			Agent agent = null;
+			ACLMessage aclMessage = (ACLMessage) ((ObjectMessage) message).getObject();
+			for(AID aid : aclMessage.getReceivers()) {
+				agent = (Agent) cachedAgents.getRunningAgents().get(aid);
+				agent.handleMessage(aclMessage);
+			}
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}

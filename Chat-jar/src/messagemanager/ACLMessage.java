@@ -6,7 +6,12 @@ import java.util.Map;
 
 import agentmanager.AID;
 
-public class ACLMessage {
+public class ACLMessage implements Serializable{
+	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private Performative performative;
 	private AID sender;
@@ -23,9 +28,7 @@ public class ACLMessage {
 	private String inReplyTo;
 	private String replyWith;
 	
-	
-	public ACLMessage() {
-	}
+	public ACLMessage() {}
 	
 	public ACLMessage(Performative performative, AID sender, List<AID> receivers, AID replyTo, String content,
 			Serializable contentObj, Map<String, Serializable> userArgs, String language, String ontology,
@@ -131,4 +134,5 @@ public class ACLMessage {
 	public void setReplyWith(String replyWith) {
 		this.replyWith = replyWith;
 	}
+
 }

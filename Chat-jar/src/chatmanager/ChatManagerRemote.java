@@ -27,4 +27,6 @@ public interface ChatManagerRemote {
 	public List<AppMessage> getMessagesOfUser(String username);
 	
 	public void addMessage(AppMessage message);
+
+	boolean isUserLoggedIn(String username);
 }

@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.jms.Message;
 
+import agentmanager.AID;
+import messagemanager.ACLMessage;
+
 public interface Agent extends Serializable {
 
-	public String init();
-	public void handleMessage(Message message);
-	public String getAgentId();
+	public AID init();
+	public void handleMessage(ACLMessage message);
+	public AID getAgentId();
 }
